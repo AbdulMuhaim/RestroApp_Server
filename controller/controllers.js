@@ -5,15 +5,15 @@ const addNewLead = async (req, res) => {
     const { name, city, mobile, status } = req.body;
     const newLead = await lead.findOne({ name: name });
     if (newLead) {
-      return res.status(200).json({ message: "lead already exist" });
+      return res.status(200).json({ message: "Lead already exist" });
     } else {
-      lead.create({
+      const data = await lead.create({
         name: name,
         city: city,
         mobile: mobile,
         status: status,
       });
-      res.status(200).json({ message: "lead added successfully" });
+      res.status(200).json({data,message:"Lead added successfully"});
     }
   } catch (error) {
     console.log(error);
